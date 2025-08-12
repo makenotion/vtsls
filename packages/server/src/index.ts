@@ -13,6 +13,7 @@ import {
   LogMessageNotification,
   ProposedFeatures,
   ShowDocumentRequest,
+  DocumentDiagnosticReport,
   ShowMessageRequest,
 } from "vscode-languageserver/node";
 import { URI } from "vscode-uri";
@@ -130,13 +131,13 @@ function bindServiceHandlers(
     };
   }
 
-  /* eslint-disable @typescript-eslint/unbound-method*/
+   
   conn.onDidOpenTextDocument(service.openTextDocument);
   conn.onDidCloseTextDocument(service.closeTextDocument);
   conn.onDidChangeTextDocument(service.changeTextDocument);
   conn.onDidChangeConfiguration(service.changeConfiguration);
   conn.workspace.onDidRenameFiles(service.renameFiles);
-  /* eslint-enable @typescript-eslint/unbound-method*/
+   
   if (clientCapabilities.workspace?.workspaceFolders) {
     // otherwise this will throw error 😈
     conn.workspace.onDidChangeWorkspaceFolders((event) =>
@@ -148,6 +149,10 @@ function bindServiceHandlers(
   conn.onDocumentHighlight(safeRun(service.documentHighlight, null));
   conn.onSignatureHelp(safeRun(service.signatureHelp, null));
   // conn.onDocumentLinks(service.documentLinks);
+  if (clientCapabilities.textDocument?.diagnostic) {
+    const nullDiagnostics: DocumentDiagnosticReport = { items: [], kind: "full" };
+    conn.languages.diagnostics.on(safeRun(service.diagnostics, nullDiagnostics))
+  }
   conn.onDefinition(safeRun(service.definition, null));
   conn.onReferences(safeRun(service.references, null));
   conn.onHover(safeRun(service.hover, null));
