@@ -219,11 +219,11 @@ export function createTSLanguageService(initOptions: TSLanguageServiceOptions) {
 
       return results.length > 0 ? results : null;
     }),
-    diagnostics: wrapRequestHandler(async (params: lsp.DocumentDiagnosticParams): Promise<lsp.DocumentDiagnosticReport> => {
+    diagnostics: wrapRequestHandler(async (params: lsp.DocumentDiagnosticParams, token: lsp.CancellationToken): Promise<lsp.DocumentDiagnosticReport> => {
       const doc = getOpenedDoc(params.textDocument.uri);
       delegate.logMessage(lsp.MessageType.Log, `diagnostics: ${doc.uri.fsPath}`);
       // Execute and wait for geterr to finish. While it executes, tsserver sends the diagnostic events to the client.
-      await shims.workspaceService.waitForGetErr();
+      await shims.workspaceService.waitForGetErr(token);
       // There is a 50ms debounce between receiving diagnostics and reporting them to vtsls.
       // See packages/service/vscode/extensions/typescript-language-features/src/languageFeatures/diagnostics.ts#L392 
       await new Promise(resolve => setTimeout(resolve, 100))
