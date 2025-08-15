@@ -282,7 +282,7 @@ export class WorkspaceShimService extends Disposable {
   async requestWorkspaceTrust() {
     return true;
   }
-  async waitForGetErr(): Promise<undefined> {
+  async waitForGetErr(token: lsp.CancellationToken): Promise<undefined> {
     // We want to make sure the getErr request has been sent 
     // This is applicable when we just did a didChange request, since tsserver will take some time to actually send the request.
     if (this.isDirty && this.recvSeq === this.sentSeq) {
@@ -290,11 +290,11 @@ export class WorkspaceShimService extends Disposable {
       // We can tell this is the case because this.sentSeq === this.recvSeq
       // We should wait for the request to be started.
       const oldSeq = this.sentSeq
-      await new Promise<void>(resolve => this.onGetBegin.event((seq: number) => {
+      await Promise.race([new Promise<void>(resolve => this.onGetBegin.event((seq: number) => {
         if (seq > oldSeq) {
           resolve()
         }
-      }))
+      })), new Promise<void>(resolve => token.onCancellationRequested(() => resolve()))])
     } else {
       // Case 2: There is an in-progress getErr request, so we can move onto the next block 
     }
