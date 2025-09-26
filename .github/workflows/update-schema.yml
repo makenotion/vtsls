@@ -13,19 +13,19 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
         with:
           submodules: "true"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 16
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@eae0cfeb286e66ffb5155f1a79b90583a127a68b # v2
         with:
           version: 8
       - run: pnpm install
       - run: pnpm --filter ./packages/service patch-extension
       - run: pnpm --filter ./packages/service gen-schema
-      - uses: stefanzweifel/git-auto-commit-action@v6
+      - uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0 # v6
         with:
           commit_message: Update config schema
           file_pattern: packages/service/configuration.schema.json
