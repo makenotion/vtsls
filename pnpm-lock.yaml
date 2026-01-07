@@ -32,7 +32,7 @@ importers:
 
   packages/server:
     dependencies:
-      '@vtsls/language-service':
+      '@eagarwal-notion/language-service':
         specifier: 0.2.9
         version: link:../service
       vscode-languageserver:
@@ -48,12 +48,12 @@ importers:
 
   packages/service:
     dependencies:
+      '@eagarwal-notion/vscode-fuzzy':
+        specifier: workspace:0.0.1
+        version: link:../vscode-fuzzy
       '@vscode/l10n':
         specifier: ^0.0.18
         version: 0.0.18
-      '@vtsls/vscode-fuzzy':
-        specifier: workspace:0.0.1
-        version: link:../vscode-fuzzy
       jsonc-parser:
         specifier: ^3.2.0
         version: 3.2.0

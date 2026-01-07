@@ -1,7 +1,7 @@
 {
-  "name": "@vtsls/language-service",
+  "name": "@eagarwal-notion/language-service",
   "description": "LSP wrapper for typescript extension of vscode",
-  "version": "0.2.9",
+  "version": "0.2.14",
   "license": "MIT",
   "engines": {
     "node": ">=16"
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@vscode/l10n": "^0.0.18",
-    "@vtsls/vscode-fuzzy": "workspace:0.0.1",
+    "@eagarwal-notion/vscode-fuzzy": "workspace:0.0.1",
     "jsonc-parser": "^3.2.0",
     "semver": "7.5.2",
     "typescript": "5.8.3",

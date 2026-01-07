@@ -1,4 +1,4 @@
-import { fuzzyScore, FuzzyScore, fuzzyScoreGracefulAggressive } from "@vtsls/vscode-fuzzy";
+import { fuzzyScore, FuzzyScore, fuzzyScoreGracefulAggressive } from "@eagarwal-notion/vscode-fuzzy";
 import type * as vscode from "vscode";
 import * as lsp from "vscode-languageserver-protocol";
 import { CommandsShimService } from "../shims/commands";

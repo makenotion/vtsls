@@ -8,7 +8,7 @@ import {
   semanticTokenTypes,
   signatureHelpReTriggerCharacters,
   signatureHelpTriggerCharacters,
-} from "@vtsls/language-service";
+} from "@eagarwal-notion/language-service";
 import { ServerCapabilities, TextDocumentSyncKind } from "vscode-languageserver/node";
 
 export function getTsLspDefaultCapabilities(): ServerCapabilities {

@@ -3,7 +3,7 @@ import {
   DocumentNotOpenedError,
   ProviderNotFoundError,
   TSLanguageService,
-} from "@vtsls/language-service";
+} from "@eagarwal-notion/language-service";
 import {
   ClientCapabilities,
   ConfigurationRequest,

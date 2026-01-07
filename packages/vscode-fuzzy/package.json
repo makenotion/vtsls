@@ -1,5 +1,5 @@
 {
-  "name": "@vtsls/vscode-fuzzy",
+  "name": "@eagarwal-notion/vscode-fuzzy",
   "description": "Fuzzy matcher extracted from VSCode",
   "version": "0.0.1",
   "license": "MIT",
